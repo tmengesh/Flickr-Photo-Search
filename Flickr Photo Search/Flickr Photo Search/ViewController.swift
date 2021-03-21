@@ -35,15 +35,18 @@ class ViewController: UIViewController {
     var photos : [FlickrURLs] = []
     
     private var collectionView: UICollectionView?
-    
+    let searchBar = UISearchBar()
+       
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        searchBar.delegate = self
+        view.addSubview(searchBar)
+        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
-        layout.itemSize = CGSize(width: view.frame.size.width/2, height: view.frame.size.width/2)
+        layout.itemSize = CGSize(width: view.frame.size.width/3, height: view.frame.size.width/2)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
@@ -53,13 +56,12 @@ class ViewController: UIViewController {
         collectionView.backgroundColor = .systemBackground
         self.collectionView = collectionView
         
-        fetchPhotos()
-        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        collectionView?.frame = view.bounds
+        searchBar.frame = CGRect(x: 10, y: view.safeAreaInsets.top, width: view.frame.size.width-20, height: 50)
+        collectionView?.frame = CGRect(x: 0, y: view.safeAreaInsets.top+55, width: view.frame.size.width, height: view.frame.size.height-55)
     }
     
     /*
@@ -71,9 +73,9 @@ class ViewController: UIViewController {
         return "https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret).jpg"
     }
     
-    func fetchPhotos() {
+    func fetchPhotos(query: String) {
         
-        let ulrString = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(apiKey)&text=football&format=json&nojsoncallback=1"
+        let ulrString = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(apiKey)&text=\(query)&format=json&nojsoncallback=1"
         
         guard let url = URL(string: ulrString) else {
             return
@@ -96,28 +98,37 @@ class ViewController: UIViewController {
         }
         task.resume()
     }
- 
 }
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        photos.count
+           photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let currentIndex = photos[indexPath.row]
         let imageUrl = generateFlickrImageURL(farm: String(currentIndex.farm), server: currentIndex.server, id: currentIndex.id, secret: currentIndex.secret)
-       
+           
         guard let  cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as? PhotoCollectionViewCell else {
-           return UICollectionViewCell()
+            return UICollectionViewCell()
         }
-       
-        cell.configure(with: imageUrl, title: currentIndex.title)
-        return cell
         
-    }
+        cell.configure(with: imageUrl, title: currentIndex.title)
+           return cell
+       }
     
+}
+
+extension ViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        if let text = searchBar.text {
+            photos = []
+            collectionView?.reloadData()
+            fetchPhotos(query: text)
+        }
+    }
 }
 
 
