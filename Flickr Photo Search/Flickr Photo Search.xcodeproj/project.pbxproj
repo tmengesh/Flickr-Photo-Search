@@ -15,6 +15,7 @@
 		D3B938862607527500FBF520 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3B938842607527500FBF520 /* LaunchScreen.storyboard */; };
 		D3B938912607527500FBF520 /* Flickr_Photo_SearchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B938902607527500FBF520 /* Flickr_Photo_SearchTests.swift */; };
 		D3B9389C2607527500FBF520 /* Flickr_Photo_SearchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B9389B2607527500FBF520 /* Flickr_Photo_SearchUITests.swift */; };
+		D3B938B02607564400FBF520 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B938AF2607564400FBF520 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		D3B938972607527500FBF520 /* Flickr Photo SearchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Flickr Photo SearchUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3B9389B2607527500FBF520 /* Flickr_Photo_SearchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flickr_Photo_SearchUITests.swift; sourceTree = "<group>"; };
 		D3B9389D2607527500FBF520 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D3B938AF2607564400FBF520 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				D3B938792607527200FBF520 /* AppDelegate.swift */,
 				D3B9387B2607527200FBF520 /* SceneDelegate.swift */,
 				D3B9387D2607527200FBF520 /* ViewController.swift */,
+				D3B938AF2607564400FBF520 /* PhotoCollectionViewCell.swift */,
 				D3B9387F2607527200FBF520 /* Main.storyboard */,
 				D3B938822607527500FBF520 /* Assets.xcassets */,
 				D3B938842607527500FBF520 /* LaunchScreen.storyboard */,
@@ -259,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3B9387E2607527200FBF520 /* ViewController.swift in Sources */,
+				D3B938B02607564400FBF520 /* PhotoCollectionViewCell.swift in Sources */,
 				D3B9387A2607527200FBF520 /* AppDelegate.swift in Sources */,
 				D3B9387C2607527200FBF520 /* SceneDelegate.swift in Sources */,
 			);
